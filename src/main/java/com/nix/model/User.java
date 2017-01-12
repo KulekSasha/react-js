@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,8 +22,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "PERSON", schema = "PUBLIC")
-@NamedEntityGraph(name = "user.role",
-        attributeNodes = @NamedAttributeNode("role"))
 public class User {
 
     @Id
@@ -57,9 +56,10 @@ public class User {
     @NotNull(message = "{user.birthday.past}")
     private Date birthday;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_ID")
     @NotNull(message = "{user.role.not.found}")
+    @RestResource(exported = false)
     private Role role;
 
 }

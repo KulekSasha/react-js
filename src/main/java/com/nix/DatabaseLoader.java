@@ -7,7 +7,8 @@ import com.nix.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
@@ -26,8 +27,12 @@ public class DatabaseLoader implements CommandLineRunner {
         Role user = new Role(2L, "User");
         this.roleRepository.save(admin);
         this.roleRepository.save(user);
+
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.userRepository.save(new User(1L, "login", "password", "email@email",
-                "firstName", "lastName", Calendar.getInstance().getTime(), admin));
+                "firstName", "lastName", sdf.parse("1990-05-01"), admin));
+        this.userRepository.save(new User(2L, "login2", "password2", "email2@email",
+                "firstName2", "lastName2", sdf.parse("2000-01-01"), user));
     }
 }
 // end::code[]
