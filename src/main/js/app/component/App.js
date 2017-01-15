@@ -3,7 +3,7 @@ import UserList from "./UserList";
 import {connect} from "react-redux";
 
 
-class App extends React.Component {
+export default class App extends React.Component {
     render() {
         return (
             <UserList users={this.props.users}/>
@@ -12,12 +12,12 @@ class App extends React.Component {
 
 }
 
-function mapStateToProps(state) {
-
-    let us = state.users || [];
-    return {
-        users: us
-    }
-}
-
-export default connect(mapStateToProps)(App);
+// function mapStateToProps(state) {
+//
+//     let users = state.users || [];
+//     return {
+//         users: users
+//     }
+// }
+//
+// export default connect(mapStateToProps)(App);

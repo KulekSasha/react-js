@@ -4,6 +4,8 @@ import App from "./component/App";
 import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import restService from "./service/RestService";
+import AppContainer from "./container/AppContainer";
+
 
 const dummyReducer = function (state, action) {
 
@@ -18,7 +20,7 @@ const dummyReducer = function (state, action) {
         default:
             return state || {users: []};
     }
-}
+};
 
 let store = createStore(dummyReducer, {}, applyMiddleware(restService));
 
@@ -26,7 +28,7 @@ store.dispatch({type: 'GET_USERS'});
 
 render(
     <Provider store={store}>
-        <App />
+        <AppContainer />
     </Provider>,
     document.getElementById('react')
 );

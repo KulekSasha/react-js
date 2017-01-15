@@ -1,16 +1,23 @@
 import React from 'react';
 import App from '../component/App';
-import { combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-
-export default class AppContainer extends React.Component {
+import {connect} from "react-redux";
 
 
+
+class AppContainer extends React.Component {
     render() {
         return (
-            <div>
-                <App />
-            </div>
+                <App users={this.props.users}/>
         )
     }
 }
+
+function mapStateToProps(state) {
+
+    let users = state.users || [];
+    return {
+        users: users
+    }
+}
+
+export default connect(mapStateToProps)(AppContainer);
