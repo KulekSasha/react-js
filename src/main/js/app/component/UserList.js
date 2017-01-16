@@ -1,6 +1,6 @@
 import React from "react";
 import UserRow from "./UserRow";
-
+import Table from "react-bootstrap/lib/Table";
 
 
 export default class UserList extends React.Component {
@@ -11,8 +11,8 @@ export default class UserList extends React.Component {
             <UserRow key={user._links.self.href} user={user}/>
         );
         return (
-            <table>
-                <tbody>
+            <Table responsive bordered>
+                <thead>
                 <tr>
                     <th>Login</th>
                     <th>First Name</th>
@@ -21,9 +21,11 @@ export default class UserList extends React.Component {
                     <th>Role</th>
                     <th>Action</th>
                 </tr>
+                </thead>
+                <tbody>
                 {listUsers}
                 </tbody>
-            </table>
+            </Table>
         )
     }
 }

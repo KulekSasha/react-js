@@ -1,34 +1,28 @@
 import React from "react";
 import {render} from "react-dom";
-import App from "./component/App";
 import {Provider} from "react-redux";
-import {createStore, applyMiddleware} from "redux";
-import restService from "./service/RestService";
-import AppContainer from "./container/AppContainer";
+import store from "./store/Store";
+import {DevTools} from "./store/Store";
+import TableContainer from "./container/TableContainer";
+import EditUserContainer from "./container/EditUserContainer";
 
+import {Router, Route, browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
 
-const dummyReducer = function (state, action) {
-
-    console.log(action.type);
-
-    switch (action.type) {
-        case 'GET_USERS_RECEIVED':
-            return Object.assign({}, state, {
-                users: action.data
-            });
-            break;
-        default:
-            return state || {users: []};
-    }
-};
-
-let store = createStore(dummyReducer, {}, applyMiddleware(restService));
+const history = syncHistoryWithStore(browserHistory, store);
 
 store.dispatch({type: 'GET_USERS'});
 
 render(
     <Provider store={store}>
-        <AppContainer />
+        <div>
+        <Router history={history}>
+            <Route path="/" component={TableContainer}/>
+            <Route path="/users/:login" component={EditUserContainer}/>
+            <Route path="/users/aaa" component={EditUserContainer}/>
+        </Router>
+        <DevTools/>
+        </div>
     </Provider>,
     document.getElementById('react')
 );
