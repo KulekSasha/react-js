@@ -4,7 +4,6 @@ import Button from "react-bootstrap/lib/Button";
 import ButtonToolbar from "react-bootstrap/lib/ButtonToolbar";
 import store from "../store/Store";
 import LinkContainer from "react-router-bootstrap/lib/LinkContainer";
-import Link from "react-router/lib/Link";
 
 export default class UserRow extends React.Component {
 
@@ -19,8 +18,9 @@ export default class UserRow extends React.Component {
                 <td>{user.role.name}</td>
                 <td>
                     <ButtonToolbar>
-                        <LinkContainer to={{pathname: '/users/' + user.login}}>
-                            <Button bsStyle='success' bsSize='xsmall' >
+                        <LinkContainer to={{pathname: this.props.path + 'users/' + user.login,
+                            user: user}} >
+                            <Button bsStyle='success' bsSize='xsmall'>
                                 Edit
                             </Button>
                         </LinkContainer>
@@ -29,7 +29,6 @@ export default class UserRow extends React.Component {
                             Delete
                         </Button>
                     </ButtonToolbar>
-                    <Link to='/users/aaa'>LINK</Link>
                 </td>
             </tr>
         )

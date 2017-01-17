@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware} from "redux";
+import {createStore, applyMiddleware, compose} from "redux";
 import reducers from "../reducer/AllReducers";
 import restService from "../service/RestService";
 
@@ -15,6 +15,6 @@ export const DevTools = createDevTools(
 
 
 // const store = createStore(reducers, {}, applyMiddleware(restService));
-const store = createStore(reducers, DevTools.instrument(), applyMiddleware(restService));
+const store = createStore(reducers, compose(applyMiddleware(restService), DevTools.instrument() ));
 
 export default store;

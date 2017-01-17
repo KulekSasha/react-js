@@ -1,5 +1,5 @@
 import React from "react";
-import UserTable from "../component/UserList";
+import UserList from "../component/UserList";
 import {connect} from "react-redux";
 // Bootstrap
 import Grid from "react-bootstrap/lib/Grid";
@@ -14,11 +14,12 @@ const rowStyle = {
 
 class TableContainer extends React.Component {
     render() {
+        let path = this.props.location.pathname;
         return (
             <Grid fluid={true}>
                 <Row className="show-grid" style={rowStyle}>
-                    <Col xs={12} md={8} xsOffset={2}>
-                        <UserTable users={this.props.users}/>
+                    <Col xs={12} md={6} xsOffset={0}>
+                        <UserList users={this.props.users} path={path}/>
                     </Col>
                 </Row>
             </Grid>

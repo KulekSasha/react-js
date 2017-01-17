@@ -1,9 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-// Bootstrap
-import Grid from "react-bootstrap/lib/Grid";
-import Row from "react-bootstrap/lib/Row";
-import Col from "react-bootstrap/lib/Col";
 
 
 const rowStyle = {
@@ -13,30 +9,36 @@ const rowStyle = {
 
 class EditUserContainer extends React.Component {
 
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
+        let currentUser = this.props.users.filter(
+            (el) => {
+                return el.login === this.props.params.login;
+        });
+
+        let login = '';
+        if (currentUser.length === 0) {
+
+        } else if (currentUser.length === 1) {
+            login = currentUser[0].login;
+        } else {
+
+        }
+
         return (
-            <Grid fluid={true}>
-                <Row style={rowStyle}>
-                    <Col xs={12} md={8} xsOffset={2}>
-                        <h1>TEST</h1>
-                    </Col>
-                </Row>
-            </Grid>
+            <div>
+
+                <h1>TEST {login}</h1>
+
+            </div>
+
         )
     }
 }
 
 function mapStateToProps(state) {
 
-    let aaa = state.AAA || '';
-
     return {
-        AAA: aaa
+        users: state.users
     }
 }
 

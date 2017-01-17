@@ -25,14 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/app/**")
     public String index() {
         return "index";
-    }
-
-    @RequestMapping(value = "/my")
-    public String index2() {
-        return "index2";
     }
 
 }

@@ -6,10 +6,8 @@ import * as actions from "../action/Actions";
 
 const restService = store => next => action => {
 
-    let z = store.getState();
-
     switch (action.type) {
-        case actions.getUsersAction().type:
+        case 'GET_USERS':
             restClient({method: 'GET', path: '/api/users'}).done(
                 function (resp) {
                     let data = resp.entity._embedded.users;
@@ -44,18 +42,8 @@ const restService = store => next => action => {
             );
             break;
 
-        case '@@router/LOCATION_CHANGE':
-            return next({
-                type: 'AAA',
-
-            });
-
-
-            break
-
-
         default:
-            break;
+            return next(action);
     }
 
 };
